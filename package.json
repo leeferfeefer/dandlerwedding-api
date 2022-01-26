@@ -1,5 +1,5 @@
 {
-  "name": "node_server",
+  "name": "dandlerwedding-api",
   "version": "1.0.0",
   "description": "Node Server with Express",
   "main": "server.js",
@@ -9,16 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leeferfeefer/node_server.git"
+    "url": "git+https://github.com/leeferfeefer/dandlerwedding-api.git"
   },
   "author": "Dan Fincher",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/leeferfeefer/node_server/issues"
-  },
-  "homepage": "https://github.com/leeferfeefer/node_server#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "morgan": "^1.10.0"
   }
 }

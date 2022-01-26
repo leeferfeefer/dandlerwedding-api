@@ -1,9 +1,9 @@
 const express = require('express');
 var logger = require('morgan');
-const thingyRoute = require('./routes/thingy.js');
+const api = require('./routes/api.js');
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // dev = :method :url :status :response-time ms - :res[content-length]
 
@@ -11,8 +11,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.text());
-
-app.use('/thingy', thingyRoute);
+app.use('/api', api);
 
 // built-in error handling
 // NOTE: must be the last piece of middleware in stack
@@ -22,7 +21,4 @@ app.use(function(err, req, res, next) {
     res.status(500).send('Something broke!');
 });
 
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`DandlerWeddingAPI listening at http://localhost:${port}`));
