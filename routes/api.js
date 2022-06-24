@@ -1,8 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 router.get('/rsvps', function(req, res) {
-  res.send('Here are your rsvps!');
+  res.status(200).send([]);
 });
+
+router.get('/gallery', function(req, res) {
+  res.status(200).send("success!");
+})
 
 module.exports = router;
