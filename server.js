@@ -4,7 +4,6 @@ const cors = require('cors');
 const api = require('./routes/api.js');
 
 const app = express();
-const port = 3001;
 
 // dev = :method :url :status :response-time ms - :res[content-length]
 
@@ -24,4 +23,14 @@ app.use(function(err, req, res, next) {
     res.status(500).send('Something broke!');
 });
 
-app.listen(port, () => console.log(`DandlerWeddingAPI listening at http://localhost:${port}`));
+app.set("port", process.env.PORT || 3001);
+app.set("host", process.env.HOST || "localhost");
+
+app.listen(app.get("port"), function() {
+  console.log(
+   "%s DandlerAPI listening at http://%s:%s",
+    process.env.NODE_ENV,
+   app.get("host"),
+   app.get("port")
+  );
+});
