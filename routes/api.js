@@ -1,18 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const { readGalleryImage } = require("../services/gallery.service");
+const AxiosService = require("../services/axios.service");
 
-router.get('/rsvps', function(req, res) {
-  res.status(200).send([]);
+router.get('/rsvpLookup', async function(req, res) {
+  try {
+    const name = req.query.name;
+    const response = await AxiosService.mongoInstance.get("/endpoint/findRSVP", { 
+      params: { name }
+    });
+    const { data } = response;
+    res.status(200).send(data);
+  } catch (error) {
+    console.log("UNKNOWN ERROR: ", JSON.stringify(error));
+    res.status(500);
+    res.end();
+  }
 });
 
-router.get('/gallery', async function(req, res) {
+router.post('/rsvpUpdate', async function(req, res) {
   try {
-    const images = await readGalleryImage();
-    res.status(200).send(JSON.stringify(images));
+    const rsvpData = req.body;
+    const response = await AxiosService.mongoInstance.post("/endpoint/updateRSVP", rsvpData);
+    const { data } = response;
+    res.status(200).send(data);
   } catch (error) {
-    res.status(500).send("error!");
+    console.log("UNKNOWN ERROR: ", JSON.stringify(error));
+    res.status(500);
+    res.end();
   }
-})
+});
 
 module.exports = router;
